@@ -34,8 +34,8 @@ body {
 
 .card {
   transition: all 0.3s ease;
-  width: 80px;
-  height: 80px;
+  width: 100px;
+  height: 100px;
   background-color: #1d4ed8;
 }
 .card.flipped {
