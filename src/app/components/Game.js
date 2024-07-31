@@ -4,7 +4,7 @@ import Card from './Card';
 
 
 const generateCards = () =>{
-    const emojis = ['😀', '😃', '😄', '😁', '😆', '😅'];
+    const emojis = ['🥰', '😃', '😄', '😁', '😆', '😅'];
     const cards = emojis.concat(emojis).map((
         emoji, index)=>({
             id: index, content: emoji, isFlipped: false, isMatched:false
@@ -23,8 +23,25 @@ const Game = ()=>{
 
     useEffect(()=>{
         if (flippedCards.length == 2){
-            console.log('matching logic')
-        }
+            const [first, second] = flippedCards;
+            if(first.content === second.content){
+                console.log('win')
+            }
+    
+        else{
+            setTimeout(() => {
+                console.log('Flipping cards');
+                setCards((prevCards) =>
+                  prevCards.map((card) => {
+                    if (card.id === first.id || card.id === second.id){
+                      return { ...card, isFlipped: false };
+                    }
+                    return card;
+                  })
+                );
+                setFlippedCards([]); 
+              }, 1000);
+            }}
     }, [flippedCards])
 
         const handleFlip = (clickedCard)=>{
@@ -36,6 +53,7 @@ const Game = ()=>{
                 setFlippedCards((prevFlipped)=>[...prevFlipped, clickedCard])
 
             }
+      
         }
     return(
         <div  className="grid grid-cols-4 gap-8">
