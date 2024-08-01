@@ -24,6 +24,7 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+    overflow: hidden;
 }
 
 @layer utilities {
@@ -34,9 +35,15 @@ body {
 
 .card {
   transition: all 0.3s ease;
-  width: 100px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   background-color: #1d4ed8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  font-size: 2rem;
+
 }
 .card.flipped {
   background-color: #fff; 

@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from './Card';
 
+import Confetti from 'react-confetti';
 
 const generateCards = () =>{
     const emojis = ['🥰', '😃', '😄', '😁', '😆', '😅'];
@@ -19,6 +20,7 @@ const Game = ()=>{
   
     const [cards, setCards] = useState(generateCards());
     const [flippedCards, setFlippedCards] = useState([]);
+    const [showConfetti, setShowConfetti] = useState(false);
 
 
     useEffect(()=>{
@@ -26,6 +28,11 @@ const Game = ()=>{
             const [first, second] = flippedCards;
             if(first.content === second.content){
                 console.log('win')
+                setShowConfetti(true);
+                setTimeout(() => {
+                    setShowConfetti(false);
+                }, 2000);
+
             }
     
         else{
@@ -56,7 +63,8 @@ const Game = ()=>{
       
         }
     return(
-        <div  className="grid grid-cols-4 gap-8">
+        <div  className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-8">
+            {showConfetti && <Confetti />}
             {cards.map((card)=>{
                 return(
                 <Card key = {card.id} card={card} handleFlip={()=>handleFlip(card)}/>
